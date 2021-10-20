@@ -39,3 +39,10 @@ input[type='submit']:hover{
 }
 
 form p{text-align: right;}
+
+.error{
+  font-size: 0.8rem;
+  color:red;
+  margin: 0;
+  padding:0
+}

@@ -16,7 +16,8 @@ function App() {
  const [email, setEmail]=useState('')
  const [pass, setPass]=useState('')
 
-console.log(user)
+console.log(user.displayName,user)
+
  function authListener(){
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
@@ -58,7 +59,8 @@ signOut(auth).then(() => {
     ?(
       <>
       <p>login successfull <button onClick={handleLogout}>logout</button></p>
-      <p> user Email:{user.email}</p>
+      <p> username: {user.displayName}</p>
+      <p> Email: {user.email}</p>
       
       </>
     ) 
@@ -67,6 +69,7 @@ signOut(auth).then(() => {
       pass={pass}
       setEmail={setEmail}
       setPass={setPass}
+      setUser={setUser}
       
     />)}
     </>
