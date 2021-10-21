@@ -5,15 +5,16 @@ import { getAuth,
     updateProfile
   } from "firebase/auth";
  import './login.css'
+ import ForgotPassword from './forgotPass';
 export default function Login({email, pass,setEmail, setPass,setUser}){
-
+    const [forgotPass, setForgotPass]=useState(false)
     const [signUp, setSingUp]=useState(false)
     const [username, setUsername]=useState('')
     const [usernameError,setUsernameError]=useState('')
     const [requestError,setReqErr]=useState('')
     const [emailError,setEmailError]=useState('')
     const [passError,setPassError]=useState('')
-
+    
    function emptyFeildvalidation(){
        if(!email){setEmailError('input Required')}
        if(!pass){setPassError('input Required')}
@@ -90,9 +91,16 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
         });}
       }
 
-    return (
+   
 
-        <form onSubmit={handleLogin} className='signUp'>
+      
+    return (
+            (forgotPass)
+                ?(<ForgotPassword email={email}
+                setEmai={setEmail}
+                setForgotPass={setForgotPass}
+               />)
+                :(<form onSubmit={handleLogin} className='signUp'>
             <div> <span class='error'>{requestError}</span></div>
 
             {(signUp)
@@ -117,10 +125,14 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
             
             <div>
                 <input type='submit' id='submit' value={signUp ?'sign up':'sign in'}/>
+            </div>    
+            <div>
+                <button onClick={(e)=>{setForgotPass(true)}}>Forgot Password?</button>
             </div>
             <div>
                 <p> Already have an account? <span class='singUp-toggle' onClick={()=>setSingUp(!signUp)}>{!signUp ?'Sign Up':'Sign In'}</span></p>
             </div>
-            <div></div>
+           
             </form>)
+            )
         }
