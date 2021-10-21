@@ -6,18 +6,8 @@ import { getAuth,
   } from "firebase/auth";
  import './login.css'
  import ForgotPassword from './forgotPass';
+import InputField from './inputField';
 
-function InputField({type,id,label,value,onChange,error}){
-    return(<div>
-    <label htmlFor={id}>{label}</label>
-    <input 
-    type={type} 
-    id={id} 
-    value={value} 
-    onChange={onChange}/>
-    <div> <span class='error'>{error}</span></div>
-    </div>)
-}
 
 export default function Login({email, pass,setEmail, setPass,setUser}){
     const [forgotPass, setForgotPass]=useState(false)
@@ -110,47 +100,48 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
       
     return (
             (forgotPass)
-                ?(<ForgotPassword email={email}
-                setEmai={setEmail}
-                setForgotPass={setForgotPass}
+                ?(<ForgotPassword 
+                    email={email}
+                    setEmail={setEmail}
+                    setForgotPass={setForgotPass}
+                    setEmailError={setEmailError}
+                    emailError={emailError}
                />)
                 :(<form onSubmit={handleLogin} className='signUp'>
             <div> <span class='error'>{requestError}</span></div>
 
             {(signUp)
-            ?(<>
-                
-                <InputField 
+
+            ?(  <InputField 
                 label='Username'
                 type='text' 
                 id='name' 
                 value={username}
                 onChange={(e)=>setUsername(e.target.value)}
                 error={usernameError}
-                />
-            
-            
-            </>)
+                />)
             :''}
             
-                <InputField 
+            <InputField 
                 label='Email'
                 type='text' 
                 id='email' 
                 value={email} 
-                onChange={(e)=>setEmail(e.target.value)}/>
+                onChange={(e)=>setEmail(e.target.value)}
+                error={emailError}/>
            
-            <div> <span class='error'>{emailError}</span></div>
+           <InputField 
+                label='Password'
+                type='password' 
+                id='password' 
+                value={pass} 
+                onChange={(e)=>setPass(e.target.value)}
+                error={passError}/>
 
-            <div>
-                <label htmlFor='password'>Password</label>
-                <input type='password' id='password' value={pass} onChange={(e)=>setPass(e.target.value)}/>
-            </div>
-            <div> <span class='error'>{passError}</span></div>
-            
-            <div>
-                <input type='submit' id='submit' value={signUp ?'sign up':'sign in'}/>
-            </div>    
+            <InputField type='submit' 
+                id='submit' 
+                value={signUp ?'sign up':'sign in'}/>
+              
             <div>
                 <button onClick={(e)=>{setForgotPass(true)}}>Forgot Password?</button>
             </div>
