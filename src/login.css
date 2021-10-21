@@ -1,0 +1,48 @@
+*{box-sizing:border-box}
+
+form {
+  width:350px;
+
+  margin:75px auto;
+  padding:40px 20px;
+  box-shadow: 5px 5px 10px grey;
+}
+input,button{
+   font-family: inherit;
+font-size: inherit;}
+
+form div{margin-bottom: 5px;}
+
+input{
+  width:100%;
+padding:10px;}
+label{font-size: 0.75rem;
+  }
+
+input[type='submit']{
+  background: rgb(11, 138, 223);
+  border: 2px solid;
+  color: white;
+  text-transform: capitalize;
+  margin-top: 25px;
+}
+input[type='submit']:hover{
+  background: transparent;
+  color:rgb(11, 138, 223);
+
+}
+
+.singUp-toggle{
+  color:rgb(7, 97, 156);
+  font-weight: bold;
+  pointer-events: visible;
+}
+
+form p{text-align: right;}
+
+.error{
+  font-size: 0.8rem;
+  color:red;
+  margin: 0;
+  padding:0
+}

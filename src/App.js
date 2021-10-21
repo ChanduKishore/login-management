@@ -1,13 +1,9 @@
  import firebase from './Firebase'
  import {useState, useEffect} from 'react'
-
- import { getAuth, 
-          onAuthStateChanged, 
-          signOut
-        } from "firebase/auth";
-
+ import Dashboard from './dashboard'
+ import { getAuth, onAuthStateChanged, } from "firebase/auth";
 import Login from './login'
-import './App.css'
+
 
 
 
@@ -16,7 +12,7 @@ function App() {
  const [email, setEmail]=useState('')
  const [pass, setPass]=useState('')
 
-console.log(user.displayName,user)
+console.log(user.uid)
 
  function authListener(){
   const auth = getAuth();
@@ -35,34 +31,16 @@ console.log(user.displayName,user)
   });
  }
 
-  
-
-  function handleLogout(){
-    const auth = getAuth();
-signOut(auth).then(() => {
-  setUser('')
-  
-  // Sign-out successful.
-}).catch((error) => {
-  // An error happened.
-  console.log(error.message)
-});
-
-
-  }
 
   useEffect(()=>{
     authListener()
   },[])
+
+
   return (<>
     {user 
     ?(
-      <>
-      <p>login successfull <button onClick={handleLogout}>logout</button></p>
-      <p> username: {user.displayName}</p>
-      <p> Email: {user.email}</p>
-      
-      </>
+      <Dashboard user={user} setUser={setUser}/>
     ) 
     :(<Login 
       email={email}

@@ -4,22 +4,29 @@ import { getAuth,
     createUserWithEmailAndPassword,
     updateProfile
   } from "firebase/auth";
- import './App.css'
+ import './login.css'
 export default function Login({email, pass,setEmail, setPass,setUser}){
 
-    const [signUp, setSingUp]=useState(true)
+    const [signUp, setSingUp]=useState(false)
     const [username, setUsername]=useState('')
+    const [usernameError,setUsernameError]=useState('')
     const [requestError,setReqErr]=useState('')
     const [emailError,setEmailError]=useState('')
     const [passError,setPassError]=useState('')
 
+   function emptyFeildvalidation(){
+       if(!email){setEmailError('input Required')}
+       if(!pass){setPassError('input Required')}
+       if(!username){setUsernameError('input Required')}
+       
+   }
     function handleLogin(e){
         e.preventDefault()
         const auth = getAuth();
-
+        
         if(signUp){
-            setPassError('')
-            setEmailError('')
+            
+            emptyFeildvalidation()
             createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
                         // Signed in 
@@ -32,12 +39,12 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
                         console.log('signUp success')
                         })
             .catch((error) => {
+                setPassError('')
+            setEmailError('')
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                
                 switch(errorCode){
-                    case 'auth/invalid-email':
-                        setEmailError(errorMessage)
-                        break
                     case 'auth/weak-password':
                         setPassError(errorMessage)
                         break
@@ -45,13 +52,13 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
                             setEmailError(errorMessage)
                             break
                 }
-                console.log(errorCode)
-                
-                console.log(errorMessage)
+               
             });
             
         }
         else{
+          
+
             signInWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
             // Signed in 
@@ -79,20 +86,22 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
                     setReqErr(errorMessage)
 
             }
-            console.log(errorCode,errorMessage)
+            
         });}
       }
 
     return (
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className='signUp'>
             <div> <span class='error'>{requestError}</span></div>
 
             {(signUp)
-            ?(<div>
+            ?(<><div>
                 <label htmlFor='name'>Username</label>
                 <input type='text' id='name' value={username} onChange={(e)=>setUsername(e.target.value)}/>
-            </div>)
+            </div>
+            <div> <span class='error'>{usernameError}</span></div>
+            </>)
             :''}
             <div>
                 <label htmlFor='email'>Email</label>
@@ -112,5 +121,6 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
             <div>
                 <p> Already have an account? <span class='singUp-toggle' onClick={()=>setSingUp(!signUp)}>{!signUp ?'Sign Up':'Sign In'}</span></p>
             </div>
+            <div></div>
             </form>)
         }

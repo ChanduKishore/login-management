@@ -1,48 +1,69 @@
-*{box-sizing:border-box}
-
-form {
-  width:350px;
-
-  margin:75px auto;
-  padding:40px 20px;
-  box-shadow: 5px 5px 10px grey;
+nav{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px ;
+    background: rgba(0, 16, 155, 0.685);
+    color:white;
+    text-transform: capitalize;
+    margin: 0;
 }
-input,button{
-   font-family: inherit;
-font-size: inherit;}
-
-form div{margin-bottom: 5px;}
-form div:last-child{margin-top: 25px;}
-input{
-  width:100%;
-padding:10px;}
-label{font-size: 0.75rem;
-  }
-
-input[type='submit']{
-  background: rgb(11, 138, 223);
-  border: 2px solid;
-  color: white;
-  text-transform: capitalize;
-  margin-top: 25px;
+.flex{display: flex;
+justify-content: space-between;
 }
-input[type='submit']:hover{
-  background: transparent;
-  color:rgb(11, 138, 223);
-
+nav button{
+    background: none;
+    color: inherit;
+    border: none;
+    text-transform: inherit;
+    text-decoration: underline;
+}
+nav button:hover{
+    text-decoration: none;
+    
 }
 
-.singUp-toggle{
-  color:rgb(7, 97, 156);
-  font-weight: bold;
-  pointer-events: visible;
+.mr-10{margin-right: 10px  }
+.ml-10{margin-left:10px}
+.space-between{
+    justify-content: space-between;
 }
 
-form p{text-align: right;}
+.update-form{
+    width:500px;
+    box-shadow: none;
+    margin:10px auto;
+}
 
-.error{
-  font-size: 0.8rem;
-  color:red;
-  margin: 0;
-  padding:0
+.update-form label{ font-size: 1rem;}
+
+.img{
+    
+    width:150px;
+    height:150px;
+    border:1px solid;
+    
+    background:url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+    font-size: 1rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img{max-width: 100%;}
+
+input[type=file]{
+    margin:0 auto;
+    width:250px;
+    display: block;
+}
+
+input[type='button']{
+    background: white;
+    color:rgba(0, 21, 209, 0.527) ;
+    border:2px solid;
+    text-transform: capitalize;
+    font-weight: bold;
+
 }
