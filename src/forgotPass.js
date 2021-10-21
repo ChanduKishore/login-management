@@ -4,9 +4,9 @@ import { getAuth,
     
   } from "firebase/auth";
 
-export default function ForgotPassword({email,setEmail,forgotPass,setForgotPass}){
+export default function ForgotPassword({email,setEmail,setForgotPass}){
     
-  console.log(forgotPass)
+  
     function sendResetPasswordLink(e){
        e.preventDefault()
         const auth = getAuth();
@@ -26,9 +26,10 @@ export default function ForgotPassword({email,setEmail,forgotPass,setForgotPass}
       }
     return(<>
     <form onSubmit={sendResetPasswordLink}>
+      <h2>Reset Password </h2>
         <label htmlFor='email'>Email</label>
         <input id='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-        <input type='submit' value='reset password'/>
+        <input type='submit' value='send reset password link'/>
     </form>
     </>)
 }

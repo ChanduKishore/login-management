@@ -11,14 +11,14 @@ nav{
 .flex{display: flex;
 justify-content: space-between;
 }
-nav button{
+ button{
     background: none;
     color: inherit;
     border: none;
     text-transform: inherit;
     text-decoration: underline;
 }
-nav button:hover{
+ button:hover{
     text-decoration: none;
     
 }
@@ -66,4 +66,16 @@ input[type='button']{
     text-transform: capitalize;
     font-weight: bold;
 
+}
+
+
+@media (width < 40rem){
+    
+    .update-form{width:100%;
+    padding:10px;
+}
+.img{margin-top: 10px;
+width:100px;
+height:100px;
+margin-bottom:0}
 }

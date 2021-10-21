@@ -6,6 +6,21 @@ import UpdateForm from "./userUpdateForm";
 import Profile from "./profile";
 import './App.css'
 
+
+function Nav({user,handleLogout}){
+  const [windowWidth, setWidth]=useState(window.innerWidth)
+  window.addEventListener('resize',()=>{setWidth(window.innerWidth)})
+  console.log(window.innerWidth)
+  return(<nav >
+    <h2>dashboard</h2>
+    <div className='flex'>
+       {(windowWidth < 400)? <span>{user.displayName.slice(0,10)}{(user.displayName.length >10)?'...':''} |</span>
+       :<span>{user.displayName}|</span>}
+    <button onClick={handleLogout}>logout</button>
+    
+    </div>
+</nav>)
+}
 export default function Dashboard({user,setUser}){
     const[copyData,setData]=useState('')
     const [userData,setUserData]=useState('')
@@ -141,15 +156,8 @@ getData()
 
 
     return(<>
-    <nav >
-        <h2>dashboard</h2>
-        <div className='flex'>
-            <span>{user.displayName} |</span>
-        <button onClick={handleLogout}>logout</button>
-        
-        </div>
-    </nav>
     
+        <Nav user={user} handleLogout={handleLogout}/>
     {(userData) 
     ?(<Profile userData={userData}
     setUserData={setUserData}

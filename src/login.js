@@ -6,6 +6,19 @@ import { getAuth,
   } from "firebase/auth";
  import './login.css'
  import ForgotPassword from './forgotPass';
+
+function InputField({type,id,label,value,onChange,error}){
+    return(<div>
+    <label htmlFor={id}>{label}</label>
+    <input 
+    type={type} 
+    id={id} 
+    value={value} 
+    onChange={onChange}/>
+    <div> <span class='error'>{error}</span></div>
+    </div>)
+}
+
 export default function Login({email, pass,setEmail, setPass,setUser}){
     const [forgotPass, setForgotPass]=useState(false)
     const [signUp, setSingUp]=useState(false)
@@ -40,6 +53,7 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
                         console.log('signUp success')
                         })
             .catch((error) => {
+                setUsernameError('')
                 setPassError('')
             setEmailError('')
                 const errorCode = error.code;
@@ -104,17 +118,28 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
             <div> <span class='error'>{requestError}</span></div>
 
             {(signUp)
-            ?(<><div>
-                <label htmlFor='name'>Username</label>
-                <input type='text' id='name' value={username} onChange={(e)=>setUsername(e.target.value)}/>
-            </div>
-            <div> <span class='error'>{usernameError}</span></div>
+            ?(<>
+                
+                <InputField 
+                label='Username'
+                type='text' 
+                id='name' 
+                value={username}
+                onChange={(e)=>setUsername(e.target.value)}
+                error={usernameError}
+                />
+            
+            
             </>)
             :''}
-            <div>
-                <label htmlFor='email'>Email</label>
-                <input type='text' id='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            </div>
+            
+                <InputField 
+                label='Email'
+                type='text' 
+                id='email' 
+                value={email} 
+                onChange={(e)=>setEmail(e.target.value)}/>
+           
             <div> <span class='error'>{emailError}</span></div>
 
             <div>
