@@ -1,8 +1,42 @@
-export default function Profile({userData,imgUrl,setUserData, setData}){
-    function handleEdit(){
-        setData(userData)
+
+
+import {useEffect} from 'react'
+import { getStorage, ref,getDownloadURL } from "firebase/storage";
+
+export default function Profile({user,userData,imgUrl,setUserData, AutoFillData,setImgUrl}){
+   
+  function handleEdit(){
         setUserData('')
+        AutoFillData()
       }
+      console.log('imgurl',imgUrl,user.uid)
+
+      useEffect(()=>{
+ 
+        const storage = getStorage();
+        getDownloadURL(ref(storage, `users/${user.uid}`))
+        .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
+      
+        // This can be downloaded directly:
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
+      
+        // Or inserted into an <img> element
+        setImgUrl(url)
+       
+      })
+      .catch((error) => {
+        // Handle any errors
+        setImgUrl('')
+        console.log(error.message)
+      });
+    },[user])
     return(<>
         <center>
         <img className='img' src={imgUrl} alt='profile picture'/>
@@ -14,7 +48,7 @@ export default function Profile({userData,imgUrl,setUserData, setData}){
           Date of birth: {userData.Dob}
         </div>
         <div>
-          Address: {`${userData.addresss_Line1} ${userData.addresss_Line2},
+          Address: {`${userData.address_Line1} ${userData.address_Line2},
                       ${userData.state},${userData.city},${userData.pincode}`}
                     
         </div>

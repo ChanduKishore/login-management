@@ -12,7 +12,7 @@ function App() {
  const [email, setEmail]=useState('')
  const [pass, setPass]=useState('')
 
-console.log(user.uid)
+console.log(user,user.displayName)
 
  function authListener(){
   const auth = getAuth();

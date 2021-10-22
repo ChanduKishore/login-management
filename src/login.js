@@ -18,7 +18,7 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
     const [emailError,setEmailError]=useState('')
     const [passError,setPassError]=useState('')
     
-   function emptyFeildvalidation(){
+   function emptyFieldvalidation(){
        if(!email){setEmailError('input Required')}
        if(!pass){setPassError('input Required')}
        if(!username){setUsernameError('input Required')}
@@ -30,7 +30,7 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
         
         if(signUp){
             
-            emptyFeildvalidation()
+            emptyFieldvalidation()
             createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
                         // Signed in 
@@ -89,6 +89,11 @@ export default function Login({email, pass,setEmail, setPass,setUser}){
                         break
                 case   'auth/too-many-requests':
                     setReqErr(errorMessage)
+                    break
+                    case   'auth/internal-error':
+                        setReqErr(errorMessage)
+                        break
+    
 
             }
             

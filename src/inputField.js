@@ -1,5 +1,5 @@
-export default function InputField({type,id,label,value,onChange,error}){
-    return(<div>
+export default function InputField({className,type,id,label,value,onChange,error}){
+    return(<div className={className}>
     <label htmlFor={id}>{label}</label>
     <input 
     type={type} 

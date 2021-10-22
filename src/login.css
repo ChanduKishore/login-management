@@ -31,14 +31,7 @@ input[type='submit']:hover{
   color:rgb(11, 138, 223);
 
 }
-input[type='button']{
-  background: white;
-  color:rgba(0, 21, 209, 0.527) ;
-  border:2px solid;
-  text-transform: capitalize;
-  font-weight: bold;
 
-}
 .singUp-toggle{
   color:rgb(7, 97, 156);
   font-weight: bold;

@@ -6,15 +6,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBe-ol7LaIyeOIz9jWYZLnzddVYas8OS2c",
-  authDomain: "login-management-e5f38.firebaseapp.com",
-  projectId: "login-management-e5f38",
-  storageBucket: "login-management-e5f38.appspot.com",
-  messagingSenderId: "782961283712",
-  appId: "1:782961283712:web:d9092481a2a7cf4a31cc65"
+  apiKey: "<your Api key>",
+  authDomain: "<your project domain>",
+  projectId: "<your project id>",
+  storageBucket: "<your storage bucket>",
+  messagingSenderId: "<messengerid>",
+  appId: "<your app id>"
 };
 
 // Initialize Firebase
  const firebase = initializeApp(firebaseConfig);
-
  export default firebase
